@@ -20,6 +20,8 @@ function createQuiz() {
   item = form.addTextItem();
   item.setTitle('Nama Siswa').setRequired(true);
 
+  var choices = [];
+
   for (var i = 5; i < data.length; i++) {
     if (data[i][0] != "") {
       if (data[i][0] == "-") {
@@ -52,13 +54,24 @@ function createQuiz() {
           case 'E': isCorrectE = true; break;
         }
 
-        item.setChoices([
-          item.createChoice(data[i][1], isCorrectA),
-          item.createChoice(data[i][2], isCorrectB),
-          item.createChoice(data[i][3], isCorrectC),
-          item.createChoice(data[i][4], isCorrectD),
-          item.createChoice(data[i][5], isCorrectE)
-        ]);
+        choices = []
+        if (data[i][1] != "") {
+          choices.push(item.createChoice(data[i][1], isCorrectA));
+        }
+        if (data[i][2] != "") {
+          choices.push(item.createChoice(data[i][2], isCorrectB));
+        }
+        if (data[i][3] != "") {
+          choices.push(item.createChoice(data[i][3], isCorrectC));
+        }
+        if (data[i][4] != "") {
+          choices.push(item.createChoice(data[i][4], isCorrectD));
+        }
+        if (data[i][5] != "") {
+          choices.push(item.createChoice(data[i][5], isCorrectE));
+        }
+
+        item.setChoices(choices);
       }
       else {
         item = form.addParagraphTextItem();
